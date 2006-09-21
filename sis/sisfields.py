@@ -151,7 +151,8 @@ class SISVersionRangeField(SISField) :
 		self.length = self.readFieldLength(fileReader)
 		fieldParser = sisreader.SISFieldParser()
 		self.fromVersion = fieldParser.parseField(fileReader)
-		self.toVersion = fieldParser.parseField(fileReader)
+		if self.length - fieldParser.lastReadBytes > 0  :
+			self.toVersion = fieldParser.parseField(fileReader)
 	
 class SISDateField(SISField) :
 	def __init__(self) :
@@ -295,6 +296,8 @@ class SISPrerequisitiesField(SISField) :
 		self.subFields.append(fieldParser.parseField(fileReader)) # target devices
 		self.subFields.append(fieldParser.parseField(fileReader)) # dependencies
 		
+import pdb
+        
 class SISDependencyField(SISField) :
 	def __init__(self) :
 		SISField.__init__(self)
@@ -303,8 +306,13 @@ class SISDependencyField(SISField) :
 		self.length = self.readFieldLength(fileReader)
 		fieldParser = sisreader.SISFieldParser()
 		self.subFields.append(fieldParser.parseField(fileReader)) # UID
-		self.subFields.append(fieldParser.parseField(fileReader)) # version range
-		self.subFields.append(fieldParser.parseField(fileReader)) # dependency names
+		field = fieldParser.parseField(fileReader)
+		# Version range field is optional
+		if field.type == VersionRangeField :
+			self.subFields.append(field) # version range
+			self.subFields.append(fieldParser.parseField(fileReader)) # dependency names
+		else :
+			self.subFields.append(field) # dependency names
 	
 class SISPropertiesField(SISField) :
 	def __init__(self) :

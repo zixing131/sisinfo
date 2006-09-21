@@ -177,7 +177,9 @@ def validateArguments(options, args) :
     if options.certificate and not PyASN1Availabe :
         raise Exception("PyASN1 not available, can't use -c switch. See http://pyasn1.sourceforge.net/")
     return result
-			
+
+import pdb
+    
 if __name__ == "__main__" :
 	parser = optparse.OptionParser(option_list=OptionList, version="%prog v0.2")
 	(options, args) = parser.parse_args(sys.argv)

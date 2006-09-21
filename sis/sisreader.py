@@ -133,15 +133,18 @@ class SISBufferReader(SISReader) :
 		
 class SISFieldParser :
 	def __init__(self) :
-		pass
+		self.lastReadBytes = 0
 		
 	def parseField(self, fileReader) :
 		"""Reads the next field from the fileReader stream and returns it"""
 		field = None
+		self.lastReadBytes = 0
 		type = fileReader.readBytesAsUint(4)
+		self.lastReadBytes += 4
 		if type != 0 :
 			field = sisfields.SISFieldTypes[type]()
 			field.type = type
 			field.initFromFile(fileReader)
-			fileReader.skipPadding()
+			self.lastReadBytes += field.length + 4 # Field length + length field
+			self.lastReadBytes += fileReader.skipPadding()
 		return field
