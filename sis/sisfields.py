@@ -30,6 +30,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 import sisreader 
 import zlib
+import sys
 
 class SISFileHeader :
 	def __init__(self) :
@@ -86,7 +87,10 @@ class SISStringField(SISField) :
 	def initFromFile(self, fileReader) :
 		self.length = self.readFieldLength(fileReader)
 		buf = fileReader.readPlainBytes(self.length)
-		self.data = buf.decode("utf-16")
+		if sys.getdefaultencoding() == "latin-1" :
+			self.data = buf.decode("utf-16")
+		else :
+			self.data = buf
 		
 	def readableStr(self) :
 		return self.data

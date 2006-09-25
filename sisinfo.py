@@ -127,7 +127,7 @@ class Handler :
 					path = os.path.abspath(options.extract)
 					if not os.path.exists(path) :
 						os.makedirs(path)
-					newFile = file(path + "\\" + parts[len(parts) - 1], "wb")
+					newFile = file(path + os.sep + parts[len(parts) - 1], "wb")
 					newFile.write(self.fileDatas[f.fileIndex].findField(sisfields.CompressedField)[0].data)
 					newFile.close()
         for s in self.signatureCertificateChains :
