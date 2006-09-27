@@ -87,10 +87,11 @@ class SISStringField(SISField) :
 	def initFromFile(self, fileReader) :
 		self.length = self.readFieldLength(fileReader)
 		buf = fileReader.readPlainBytes(self.length)
-		if sys.getdefaultencoding() == "latin-1" :
-			self.data = buf.decode("utf-16")
-		else :
-			self.data = buf
+		self.data = u""
+		while len(buf) > 0 :
+			temp = buf[:2]
+			buf = buf[2:]
+			self.data += unichr(ord(temp[0]) | ord(temp[1]) << 8)
 		
 	def readableStr(self) :
 		return self.data
