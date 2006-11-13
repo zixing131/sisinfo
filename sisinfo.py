@@ -125,6 +125,7 @@ class Handler :
 				parts = f.findField(sisfields.StringField)[0].readableStr().split("\\")
 				if len(parts[len(parts) - 1]) > 0 :
 					path = os.path.abspath(options.extract)
+					path += os.sep + os.sep.join(parts[1:-1])
 					if not os.path.exists(path) :
 						os.makedirs(path)
 					newFile = file(path + os.sep + parts[len(parts) - 1], "wb")
