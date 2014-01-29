@@ -1,0 +1,45 @@
+SISInfo is a tool for inspecting the contents of Symbian SIS
+installation packages. Supported SIS file format is the one introduced
+in Symbian 9.1 and S60 3rd edition. File format specification can be
+found here
+
+
+Installation:
+	
+
+To use the sisinfo.py python script you must have python installed.
+Python can be download from here. Version 2.4.3 was used during the
+development, but any later version should work as well.
+
+Unzip the installation package to anywhere in your hard drive.
+Usage:
+	
+
+The sisinfo.py script should be run from the command prompt.
+
+If you have associated the .py extension with the python interpreter,
+you should be able to run the script by simply typing sisinfo.py in
+the directory that you unzipped the script to.
+
+If simply typing the name of the script does not work for you, then
+you have to run the python interpreter explicitly by typing python
+sisinfo.py, or c:\python24\python sisinfo.py if your python
+installation directory is not in the PATH environment variable (change
+the c:\python24 to reflect your own python installation directory).
+
+sisinfo.py [options]		
+-f FILENAME, --file=FILENAME 	Name of the SIS file to inspect
+-i, --info 	Print information about SIS contents
+-s, --structure 	Print SIS file structure
+-e PATH, --extract=PATH 	Extract the files from the SIS file to PATH
+-c, --certificate 	Print certificate information
+
+At least -f switch has to be given on command line to define the SIS
+file to inspect and one or more of the other options to specify the
+actions to perform.
+
+To print the certificate information, PyASN1 has to be installed.
+PyASN1 homepage
+
+
+Original homepage: http://web.archive.org/web/20100213104423/http://www.niksula.cs.hut.fi/~jpsukane/sisinfo.html

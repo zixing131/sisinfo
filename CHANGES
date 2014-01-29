@@ -1,0 +1,24 @@
+
+History
+=============
+
+sisinfo.py v0.6
+* Extract files option now extracts files with path.
+
+sisinfo.py v0.5
+* Bug fix: Unicode strings were handled incorrectly.
+
+sisinfo.py v0.4
+* Bug fix: Version 0.3 did not work on Linux because of incorrect path
+  separator used.
+
+sisinfo.py v0.3
+* Bug fix: version range "to field" is optional, but it was processed
+  always. Same goes for version range field of the dependency field.
+
+sisinfo.py v0.2
+* Support for printing certificate information.
+
+sisinfo.py v0.1
+* Initial version supporting printing sis file contents and structure,
+  and extracting the sis file contents.
